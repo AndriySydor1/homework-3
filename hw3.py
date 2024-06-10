@@ -22,22 +22,3 @@ def process_directory(source_dir, target_dir):
         for dirpath, dirnames, filenames in os.walk(source_dir):
             for file in filenames:
                 executor.submit(copy_file, file, dirpath, target_dir)
-'''   Напишіть реалізацію функції factorize, яка приймає список чисел та повертає список чисел, на які числа з вхідного списку поділяються без залишку.
-'''
-import math
-import multiprocessing
-
-def factorize(number):
-    factors = []
-    for i in range(1, int(math.sqrt(number)) + 1):
-        if number % i == 0:
-            factors.append(i)
-            if number // i != i:
-                factors.append(number // i)
-    return sorted(factors)
-
-def process_numbers(numbers):
-    with multiprocessing.Pool() as pool:
-        results = pool.map(factorize, numbers)
-    return results
-
